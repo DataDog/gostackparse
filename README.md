@@ -1,2 +1,84 @@
 # gostackparse
-WIP - Come back soon.
+
+Package gostackparse parses goroutines stack trace dumps as produced by `panic()` or `runtime.Stack()` at ~300 MiB/s.
+
+## Usage
+
+The package provides a simple [Parse()](https://pkg.go.dev/github.com/DataDog/gostackparse#Parse) API. You can use it like [this](./example):
+
+```go
+import "github.com/DataDog/gostackparse"
+
+func main() {
+	// Get a text-based stack trace
+	stack := debug.Stack()
+	// Parse it
+	goroutines, _ := gostackparse.Parse(bytes.NewReader(stack))
+	// Ouptut the results
+	json.NewEncoder(os.Stdout).Encode(goroutines)
+}
+```
+
+The result is a simple list of [Goroutine](https://pkg.go.dev/github.com/DataDog/gostackparse#Goroutine) structs:
+
+```
+[
+  {
+    "ID": 1,
+    "State": "running",
+    "Wait": 0,
+    "LockedToThread": false,
+    "Stack": [
+      {
+        "Func": "runtime/debug.Stack",
+        "File": "/usr/local/Cellar/go/1.16/libexec/src/runtime/debug/stack.go",
+        "Line": 24
+      },
+      {
+        "Func": "main.main",
+        "File": "/home/go/src/github.com/DataDog/gostackparse/example/main.go",
+        "Line": 18
+      }
+    ],
+    "FramesElided": false,
+    "CreatedBy": null
+  }
+]
+```
+
+## Design Goals
+
+1. Safe: No panics should be thrown.
+2. Simple: Keep this pkg small and easy to modify.
+3. Forgiving: Favor producing partial results over no results, even if the input data is different than expected.
+4. Efficient: Parse several hundred MiB/s.
+
+## Testing
+
+gostackparse has been tested using a combination of hand picked [test-fixtures](./test-fixtures), [property based testing](https://github.com/DataDog/gostackparse/search?q=TestParse_PropertyBased), and [fuzzing](https://github.com/DataDog/gostackparse/search?q=Fuzz).
+
+## Benchmarks
+
+gostackparse includes a small benchmark that shows that it can parse [test-fixtures/waitsince.txt](./test-fixtures/waitsince.txt) at ~300 MiB/s and how that compares to panicparse.
+
+```
+$ go test -tags panicparse -bench .
+goos: darwin
+goarch: amd64
+pkg: github.com/DataDog/gostackparse
+cpu: Intel(R) Core(TM) i7-9750H CPU @ 2.60GHz
+BenchmarkGostackparse-12   45456    26275 ns/op 302.34 MiB/s   17243 B/op    306 allocs/op
+BenchmarkPanicparse-12     76    15943320 ns/op   0.50 MiB/s 5274247 B/op 116049 allocs/op
+PASS
+ok  	github.com/DataDog/gostackparse	3.634s
+```
+
+## Comparsion to panicparse
+
+[panicparse](https://github.com/maruel/panicparse) is a popular library implementing similar functionality.
+
+gostackparse was created to provide a subset of the functionality using ~10x less code while achieving > 100x faster performance. If you like fast minimalistic code, you might prefer it. If you're looking for more features and a larger community, use panicparse.
+
+## License
+
+This work is dual-licensed under Apache 2.0 or BSD3. See [LICENSE](./LICENSE).
