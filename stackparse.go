@@ -4,7 +4,7 @@
 // Copyright 2016 Datadog, Inc.
 
 // Package stackparse parses goroutines stack trace dumps as produced by
-// runtime.Stack(). The design goals are:
+// panic() or runtime.Stack(). The design goals are:
 //
 // 1. Safe: No panics should be thrown.
 // 2. Simple: Keep this pkg small and easy to modify.
