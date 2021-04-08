@@ -42,5 +42,5 @@ func BenchmarkPanicparse(b *testing.B) {
 	}
 
 	mbPerSec := float64(parsedBytes) / time.Since(start).Seconds() / 1024 / 1024
-	b.ReportMetric(mbPerSec, "MB/s")
+	b.ReportMetric(mbPerSec, "MiB/s")
 }

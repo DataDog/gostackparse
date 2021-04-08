@@ -64,7 +64,9 @@ gostackparse has been tested using a combination of hand picked [test-fixtures](
 gostackparse includes a small benchmark that shows that it can parse [test-fixtures/waitsince.txt](./test-fixtures/waitsince.txt) at ~300 MiB/s and how that compares to panicparse.
 
 ```
-$ go test -tags panicparse -bench .
+$ cp panicparse_test.go.disabled panicparse_test.go
+$ go get -t .
+$ go test -bench .
 goos: darwin
 goarch: amd64
 pkg: github.com/DataDog/gostackparse
