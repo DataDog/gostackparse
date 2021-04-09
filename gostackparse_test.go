@@ -365,13 +365,12 @@ func TestFuzzCorupus(t *testing.T) {
 	if os.Getenv("FUZZ_CORPUS") == "" {
 		t.Skip("set FUZZ_CORPUS=true to generate fuzz corpus")
 	}
+	dir := "corpus"
 	tests := fixtures.Permutations()
+	require.NoError(t, os.MkdirAll(dir, 0755))
 	for i := 0; i < tests; i++ {
 		dump := fixtures.Generate(i)
-		name := filepath.Join("fuzz-corpus", fmt.Sprintf("%d.txt", i))
-		err := ioutil.WriteFile(name, []byte(dump.String()), 0666)
-		if err != nil {
-			t.Fatal(err)
-		}
+		name := filepath.Join(dir, fmt.Sprintf("%d.txt", i))
+		require.NoError(t, ioutil.WriteFile(name, []byte(dump.String()), 0666))
 	}
 }
