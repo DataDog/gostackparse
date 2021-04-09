@@ -1,6 +1,12 @@
 # Contributing
 
-Below are various commands that might be useful for people trying to contribute to this package.
+Contributions are welcome. For smaller changes feel free to send a PR directly, but for big stuff it probably makes sense to open an issue first to discuss it.
+
+Please always try to clearly describe what problem you are trying to solve (intend) rather then just describing the change your are trying to make.
+
+## Runbook
+
+Below are various commands and procedures that might be useful for people trying to contribute to this package.
 
 ```
 # run all tests
