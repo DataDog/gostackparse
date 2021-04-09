@@ -62,6 +62,12 @@ The result is a simple list of [Goroutine](https://pkg.go.dev/github.com/DataDog
 
 gostackparse has been tested using a combination of hand picked [test-fixtures](./test-fixtures), [property based testing](https://github.com/DataDog/gostackparse/search?q=TestParse_PropertyBased), and [fuzzing](https://github.com/DataDog/gostackparse/search?q=Fuzz).
 
+## Comparsion to panicparse
+
+[panicparse](https://github.com/maruel/panicparse) is a popular library implementing similar functionality.
+
+gostackparse was created to provide a subset of the functionality using ~10x less code while achieving > 100x faster performance. If you like fast minimalistic code, you might prefer it. If you're looking for more features and a larger community, use panicparse.
+
 ## Benchmarks
 
 gostackparse includes a small benchmark that shows that it can parse [test-fixtures/waitsince.txt](./test-fixtures/waitsince.txt) at ~300 MiB/s and how that compares to panicparse.
@@ -79,12 +85,6 @@ BenchmarkPanicparse-12     76    15943320 ns/op   0.50 MiB/s 5274247 B/op 116049
 PASS
 ok  	github.com/DataDog/gostackparse	3.634s
 ```
-
-## Comparsion to panicparse
-
-[panicparse](https://github.com/maruel/panicparse) is a popular library implementing similar functionality.
-
-gostackparse was created to provide a subset of the functionality using ~10x less code while achieving > 100x faster performance. If you like fast minimalistic code, you might prefer it. If you're looking for more features and a larger community, use panicparse.
 
 ## License
 
