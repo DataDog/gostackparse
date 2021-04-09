@@ -1,3 +1,5 @@
+![ci test status](https://img.shields.io/github/workflow/status/DataDog/gostackparse/Go?label=tests)
+
 # gostackparse
 
 Package gostackparse parses goroutines stack trace dumps as produced by `panic()` or `runtime.Stack()` at ~300 MiB/s.
