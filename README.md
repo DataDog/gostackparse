@@ -1,4 +1,5 @@
-![ci test status](https://img.shields.io/github/workflow/status/DataDog/gostackparse/Go?label=tests)
+[![ci test status](https://img.shields.io/github/workflow/status/DataDog/gostackparse/Go?label=tests)](https://github.com/DataDog/gostackparse/actions/workflows/go.yml?query=branch%3Amain)
+[![documentation](http://img.shields.io/badge/godoc-reference-blue.svg)](https://pkg.go.dev/github.com/DataDog/gostackparse)
 
 # gostackparse
 
