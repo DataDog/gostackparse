@@ -4,7 +4,7 @@
 // Copyright 2021 Datadog, Inc.
 
 // Package gostackparse parses goroutines stack traces as produced by panic()
-// or runtime.Stack() at ~300 MiB/s.
+// or debug.Stack() at ~300 MiB/s.
 package gostackparse
 
 import (
