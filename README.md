@@ -5,7 +5,7 @@
 
 Package gostackparse parses goroutines stack trace dumps as produced by [`panic()`](https://golang.org/pkg/builtin/#panic) or [`debug.Stack()`](https://golang.org/pkg/runtime/debug/#Stack) at ~300 MiB/s.
 
-Please refer to [Goroutine Profiling in Go](https://github.com/DataDog/go-profiler-notes/blob/main/goroutine.md#feature-matrix) for reasons why one might want to have to parse this data.
+Parsing this data can be useful for [Goroutine Profiling](https://github.com/DataDog/go-profiler-notes/blob/main/goroutine.md#feature-matrix) or analyzing crashes from log files.
 
 ## Usage
 
