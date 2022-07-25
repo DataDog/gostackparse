@@ -1,0 +1,175 @@
+goroutine 1 [running]:
+main.stackAll()
+	/Users/eric/Downloads/gostackparse/test-fixtures/ancestors.go:31 +0x8c
+main.main()
+	/Users/eric/Downloads/gostackparse/test-fixtures/ancestors.go:24 +0xb8
+
+goroutine 25 [chan receive]:
+main.bar(0x140000a4060, 0x0)
+	/Users/eric/Downloads/gostackparse/test-fixtures/ancestors.go:57 +0x11c
+main.foo.func2()
+	/Users/eric/Downloads/gostackparse/test-fixtures/ancestors.go:50 +0x34
+created by main.d1
+	/Users/eric/Downloads/gostackparse/test-fixtures/ancestors.go:69 +0x34
+[originating from goroutine 24]:
+main.d1(...)
+	/Users/eric/Downloads/gostackparse/test-fixtures/ancestors.go:70 +0x34
+main.d1(...)
+	/Users/eric/Downloads/gostackparse/test-fixtures/ancestors.go:73 +0x54
+main.d1(...)
+	/Users/eric/Downloads/gostackparse/test-fixtures/ancestors.go:73 +0x54
+main.d1(...)
+	/Users/eric/Downloads/gostackparse/test-fixtures/ancestors.go:73 +0x54
+main.d1(...)
+	/Users/eric/Downloads/gostackparse/test-fixtures/ancestors.go:73 +0x54
+main.d1(...)
+	/Users/eric/Downloads/gostackparse/test-fixtures/ancestors.go:73 +0x54
+main.foo(...)
+	/Users/eric/Downloads/gostackparse/test-fixtures/ancestors.go:52 +0xec
+main.bar.func1(...)
+	/Users/eric/Downloads/gostackparse/test-fixtures/ancestors.go:61 +0x34
+created by main.d1
+	/Users/eric/Downloads/gostackparse/test-fixtures/ancestors.go:69 +0x34
+[originating from goroutine 23]:
+main.d1(...)
+	/Users/eric/Downloads/gostackparse/test-fixtures/ancestors.go:70 +0x34
+main.d1(...)
+	/Users/eric/Downloads/gostackparse/test-fixtures/ancestors.go:73 +0x54
+main.d1(...)
+	/Users/eric/Downloads/gostackparse/test-fixtures/ancestors.go:73 +0x54
+main.d1(...)
+	/Users/eric/Downloads/gostackparse/test-fixtures/ancestors.go:73 +0x54
+main.d1(...)
+	/Users/eric/Downloads/gostackparse/test-fixtures/ancestors.go:73 +0x54
+main.d1(...)
+	/Users/eric/Downloads/gostackparse/test-fixtures/ancestors.go:73 +0x54
+main.bar(...)
+	/Users/eric/Downloads/gostackparse/test-fixtures/ancestors.go:61 +0x88
+main.foo.func2(...)
+	/Users/eric/Downloads/gostackparse/test-fixtures/ancestors.go:50 +0x34
+created by main.d1
+	/Users/eric/Downloads/gostackparse/test-fixtures/ancestors.go:69 +0x34
+[originating from goroutine 22]:
+main.d1(...)
+	/Users/eric/Downloads/gostackparse/test-fixtures/ancestors.go:70 +0x34
+main.d1(...)
+	/Users/eric/Downloads/gostackparse/test-fixtures/ancestors.go:73 +0x54
+main.d1(...)
+	/Users/eric/Downloads/gostackparse/test-fixtures/ancestors.go:73 +0x54
+main.d1(...)
+	/Users/eric/Downloads/gostackparse/test-fixtures/ancestors.go:73 +0x54
+main.d1(...)
+	/Users/eric/Downloads/gostackparse/test-fixtures/ancestors.go:73 +0x54
+main.d1(...)
+	/Users/eric/Downloads/gostackparse/test-fixtures/ancestors.go:73 +0x54
+main.foo(...)
+	/Users/eric/Downloads/gostackparse/test-fixtures/ancestors.go:52 +0xec
+main.bar.func1(...)
+	/Users/eric/Downloads/gostackparse/test-fixtures/ancestors.go:61 +0x34
+created by main.d1
+	/Users/eric/Downloads/gostackparse/test-fixtures/ancestors.go:69 +0x34
+[originating from goroutine 21]:
+main.d1(...)
+	/Users/eric/Downloads/gostackparse/test-fixtures/ancestors.go:70 +0x34
+main.d1(...)
+	/Users/eric/Downloads/gostackparse/test-fixtures/ancestors.go:73 +0x54
+main.d1(...)
+	/Users/eric/Downloads/gostackparse/test-fixtures/ancestors.go:73 +0x54
+main.d1(...)
+	/Users/eric/Downloads/gostackparse/test-fixtures/ancestors.go:73 +0x54
+main.d1(...)
+	/Users/eric/Downloads/gostackparse/test-fixtures/ancestors.go:73 +0x54
+main.d1(...)
+	/Users/eric/Downloads/gostackparse/test-fixtures/ancestors.go:73 +0x54
+main.bar(...)
+	/Users/eric/Downloads/gostackparse/test-fixtures/ancestors.go:61 +0x88
+main.foo.func2(...)
+	/Users/eric/Downloads/gostackparse/test-fixtures/ancestors.go:50 +0x34
+created by main.d1
+	/Users/eric/Downloads/gostackparse/test-fixtures/ancestors.go:69 +0x34
+[originating from goroutine 20]:
+main.d1(...)
+	/Users/eric/Downloads/gostackparse/test-fixtures/ancestors.go:70 +0x34
+main.d1(...)
+	/Users/eric/Downloads/gostackparse/test-fixtures/ancestors.go:73 +0x54
+main.d1(...)
+	/Users/eric/Downloads/gostackparse/test-fixtures/ancestors.go:73 +0x54
+main.d1(...)
+	/Users/eric/Downloads/gostackparse/test-fixtures/ancestors.go:73 +0x54
+main.d1(...)
+	/Users/eric/Downloads/gostackparse/test-fixtures/ancestors.go:73 +0x54
+main.d1(...)
+	/Users/eric/Downloads/gostackparse/test-fixtures/ancestors.go:73 +0x54
+main.foo(...)
+	/Users/eric/Downloads/gostackparse/test-fixtures/ancestors.go:52 +0xec
+created by main.main
+	/Users/eric/Downloads/gostackparse/test-fixtures/ancestors.go:19 +0x58
+[originating from goroutine 1]:
+main.main(...)
+	/Users/eric/Downloads/gostackparse/test-fixtures/ancestors.go:20 +0x58
+
+goroutine 29 [chan receive]:
+main.bar(0x140000a4240, 0x0)
+	/Users/eric/Downloads/gostackparse/test-fixtures/ancestors.go:57 +0x11c
+main.foo.func2()
+	/Users/eric/Downloads/gostackparse/test-fixtures/ancestors.go:50 +0x34
+created by main.d1
+	/Users/eric/Downloads/gostackparse/test-fixtures/ancestors.go:69 +0x34
+[originating from goroutine 28]:
+main.d1(...)
+	/Users/eric/Downloads/gostackparse/test-fixtures/ancestors.go:70 +0x34
+main.d1(...)
+	/Users/eric/Downloads/gostackparse/test-fixtures/ancestors.go:73 +0x54
+main.d1(...)
+	/Users/eric/Downloads/gostackparse/test-fixtures/ancestors.go:73 +0x54
+main.d1(...)
+	/Users/eric/Downloads/gostackparse/test-fixtures/ancestors.go:73 +0x54
+main.d1(...)
+	/Users/eric/Downloads/gostackparse/test-fixtures/ancestors.go:73 +0x54
+main.d1(...)
+	/Users/eric/Downloads/gostackparse/test-fixtures/ancestors.go:73 +0x54
+main.foo(...)
+	/Users/eric/Downloads/gostackparse/test-fixtures/ancestors.go:52 +0xec
+main.bar.func1(...)
+	/Users/eric/Downloads/gostackparse/test-fixtures/ancestors.go:61 +0x34
+created by main.d1
+	/Users/eric/Downloads/gostackparse/test-fixtures/ancestors.go:69 +0x34
+[originating from goroutine 27]:
+main.d1(...)
+	/Users/eric/Downloads/gostackparse/test-fixtures/ancestors.go:70 +0x34
+main.d1(...)
+	/Users/eric/Downloads/gostackparse/test-fixtures/ancestors.go:73 +0x54
+main.d1(...)
+	/Users/eric/Downloads/gostackparse/test-fixtures/ancestors.go:73 +0x54
+main.d1(...)
+	/Users/eric/Downloads/gostackparse/test-fixtures/ancestors.go:73 +0x54
+main.d1(...)
+	/Users/eric/Downloads/gostackparse/test-fixtures/ancestors.go:73 +0x54
+main.d1(...)
+	/Users/eric/Downloads/gostackparse/test-fixtures/ancestors.go:73 +0x54
+main.bar(...)
+	/Users/eric/Downloads/gostackparse/test-fixtures/ancestors.go:61 +0x88
+main.foo.func2(...)
+	/Users/eric/Downloads/gostackparse/test-fixtures/ancestors.go:50 +0x34
+created by main.d1
+	/Users/eric/Downloads/gostackparse/test-fixtures/ancestors.go:69 +0x34
+[originating from goroutine 26]:
+main.d1(...)
+	/Users/eric/Downloads/gostackparse/test-fixtures/ancestors.go:70 +0x34
+main.d1(...)
+	/Users/eric/Downloads/gostackparse/test-fixtures/ancestors.go:73 +0x54
+main.d1(...)
+	/Users/eric/Downloads/gostackparse/test-fixtures/ancestors.go:73 +0x54
+main.d1(...)
+	/Users/eric/Downloads/gostackparse/test-fixtures/ancestors.go:73 +0x54
+main.d1(...)
+	/Users/eric/Downloads/gostackparse/test-fixtures/ancestors.go:73 +0x54
+main.d1(...)
+	/Users/eric/Downloads/gostackparse/test-fixtures/ancestors.go:73 +0x54
+main.foo(...)
+	/Users/eric/Downloads/gostackparse/test-fixtures/ancestors.go:52 +0xec
+created by main.main
+	/Users/eric/Downloads/gostackparse/test-fixtures/ancestors.go:22 +0xa4
+[originating from goroutine 1]:
+main.main(...)
+	/Users/eric/Downloads/gostackparse/test-fixtures/ancestors.go:23 +0xa4

@@ -27,6 +27,7 @@ const (
 	stateCreatedBy
 	stateCreatedByFunc
 	stateCreatedByFile
+	stateOriginatingFrom
 )
 
 // Parse parses a goroutines stack trace dump as produced by runtime.Stack().
@@ -69,17 +70,30 @@ func Parse(r io.Reader) ([]*Goroutine, []error) {
 
 	statemachine:
 		switch state {
-		case stateHeader:
+		case stateHeader, stateOriginatingFrom:
 			// Ignore lines that don't look like goroutine headers. This helps with
 			// leading/trailing whitespace but also in case we encountered an error
 			// during the previous goroutine and need to seek to the beginning of the
 			// next one.
-			if !bytes.HasPrefix(line, goroutinePrefix) {
-				continue
+			if state == stateHeader {
+				if !bytes.HasPrefix(line, goroutinePrefix) {
+					continue
+				}
+				g = parseGoroutineHeader(line[len(goroutinePrefix):])
+				goroutines = append(goroutines, g)
+			}
+			if state == stateOriginatingFrom {
+				ancestorIDStr := line[len(originatingFromPrefix) : len(line)-2]
+				ancestorID, err := strconv.Atoi(string(ancestorIDStr))
+				if err != nil {
+					abortGoroutine(err.Error())
+					continue
+				}
+				ancestorG := &Goroutine{ID: ancestorID}
+				g.Ancestor = ancestorG
+				g = ancestorG
 			}
 
-			g = parseGoroutineHeader(line[len(goroutinePrefix):])
-			goroutines = append(goroutines, g)
 			state = stateStackFunc
 			if g == nil {
 				abortGoroutine("invalid goroutine header")
@@ -91,6 +105,10 @@ func Parse(r io.Reader) ([]*Goroutine, []error) {
 					g.FramesElided = true
 					state = stateCreatedBy
 					continue
+				}
+				if bytes.HasPrefix(line, originatingFromPrefix) {
+					state = stateOriginatingFrom
+					goto statemachine
 				}
 				abortGoroutine("invalid function call")
 				continue
@@ -129,9 +147,10 @@ func Parse(r io.Reader) ([]*Goroutine, []error) {
 }
 
 var (
-	goroutinePrefix = []byte("goroutine ")
-	createdByPrefix = []byte("created by ")
-	framesElided    = []byte("...additional frames elided...")
+	goroutinePrefix       = []byte("goroutine ")
+	createdByPrefix       = []byte("created by ")
+	originatingFromPrefix = []byte("[originating from goroutine ")
+	framesElided          = []byte("...additional frames elided...")
 )
 
 var goroutineHeader = regexp.MustCompile(
@@ -289,6 +308,9 @@ type Goroutine struct {
 	FramesElided bool
 	// CreatedBy is the frame that created this goroutine, nil for main().
 	CreatedBy *Frame
+	// Ancestors are the Goroutines that created this goroutine.
+	// See GODEBUG=tracebackancestors=n in https://pkg.go.dev/runtime.
+	Ancestor *Goroutine `json:"Ancestor,omitempty"`
 }
 
 // Frame is a single call frame on the stack.
