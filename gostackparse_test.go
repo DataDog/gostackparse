@@ -374,3 +374,75 @@ func TestFuzzCorupus(t *testing.T) {
 		require.NoError(t, ioutil.WriteFile(name, []byte(dump.String()), 0666))
 	}
 }
+
+func Test_parseFile(t *testing.T) {
+	tests := []struct {
+		name       string
+		line       string
+		wantFrame  Frame
+		wantReturn bool
+	}{
+		{
+			name:       "empty",
+			line:       "",
+			wantFrame:  Frame{},
+			wantReturn: false,
+		},
+		{
+			name: "simple",
+			line: "\t/root/go1.15.6.linux.amd64/src/net/http/server.go:2969 +0x36c",
+			wantFrame: Frame{
+				File: "/root/go1.15.6.linux.amd64/src/net/http/server.go",
+				Line: 2969,
+			},
+			wantReturn: true,
+		},
+		{
+			name: "simple+space",
+			line: "\t/root/go1.15.6.linux.amd64/src/net/http/cool server.go:2969 +0x36c",
+			wantFrame: Frame{
+				File: "/root/go1.15.6.linux.amd64/src/net/http/cool server.go",
+				Line: 2969,
+			},
+			wantReturn: true,
+		},
+		{
+			name: "no-relative-pc",
+			line: "\t/root/go1.15.6.linux.amd64/src/net/http/server.go:2969",
+			wantFrame: Frame{
+				File: "/root/go1.15.6.linux.amd64/src/net/http/server.go",
+				Line: 2969,
+			},
+			wantReturn: true,
+		},
+		{
+			name: "no-relative-pc+space",
+			line: "\t/root/go1.15.6.linux.amd64/src/net/http/cool server.go:2969",
+			wantFrame: Frame{
+				File: "/root/go1.15.6.linux.amd64/src/net/http/cool server.go",
+				Line: 2969,
+			},
+			wantReturn: true,
+		},
+	}
+	for _, tt := range tests {
+		if len(tt.line) > 1 {
+			tt.name = "windows+" + tt.name
+			tt.line = "\tC:" + tt.line[1:]
+			tt.wantFrame.File = "C:" + tt.wantFrame.File
+			tests = append(tests, tt)
+		}
+	}
+
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			var f Frame
+			got := parseFile([]byte(tt.line), &f)
+			if got != tt.wantReturn {
+				t.Fatalf("got=%v want=%v", got, tt.wantReturn)
+			} else if f != tt.wantFrame {
+				t.Fatalf("got=%+v want=%+v", f, tt.wantFrame)
+			}
+		})
+	}
+}
