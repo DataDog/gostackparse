@@ -1,0 +1,20 @@
+{
+  "Errors": null,
+  "Goroutines": [
+    {
+      "ID": 1,
+      "State": "running",
+      "Wait": 0,
+      "LockedToThread": false,
+      "Stack": [
+        {
+          "Func": "runtime/pprof.writeGoroutineStacks",
+          "File": "C:/Users/felixge/pprof.go",
+          "Line": 693
+        }
+      ],
+      "FramesElided": false,
+      "CreatedBy": null
+    }
+  ]
+}

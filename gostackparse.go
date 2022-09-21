@@ -253,35 +253,52 @@ func parseFunc(line []byte, state parserState) *Frame {
 //
 // Example Update:
 // &Frame{File: "/root/go1.15.6.linux.amd64/src/net/http/server.go", Line: 2969}
-func parseFile(line []byte, f *Frame) bool {
-	if len(line) == 0 || line[0] != '\t' {
+//
+// Note: The +0x36c is the relative pc offset from the function entry pc. It's
+// omitted if it's 0.
+func parseFile(line []byte, f *Frame) (ret bool) {
+	if len(line) < 2 || line[0] != '\t' {
 		return false
 	}
-
 	line = line[1:]
-	for i, c := range line {
-		if c == ':' {
-			if f.File != "" {
-				return false
-			}
-			f.File = string(line[0:i])
-		} else if c == ' ' || i+1 == len(line) {
-			if f.File == "" {
-				return false
-			}
-			var end int
-			if c == ' ' {
-				end = i
-			} else {
-				end = i + 1
-			}
 
-			var err error
-			f.Line, err = strconv.Atoi(string(line[len(f.File)+1 : end]))
-			return err == nil
+	const (
+		stateFilename = iota
+		stateColon
+		stateLine
+	)
+
+	var state = stateFilename
+	for i, c := range line {
+		switch state {
+		case stateFilename:
+			if c == ':' {
+				state = stateColon
+			}
+		case stateColon:
+			if isDigit(c) {
+				f.File = string(line[0 : i-1])
+				f.Line = int(c - '0')
+				state = stateLine
+				ret = true
+			} else {
+				state = stateFilename
+			}
+		case stateLine:
+			if c == ' ' {
+				return true
+			} else if !isDigit(c) {
+				return false
+			}
+			f.Line = f.Line*10 + int(c-'0')
 		}
+
 	}
-	return false
+	return
+}
+
+func isDigit(c byte) bool {
+	return c >= '0' && c <= '9'
 }
 
 // Goroutine represents a single goroutine and its stack after extracting it
