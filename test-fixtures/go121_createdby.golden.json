@@ -1,0 +1,54 @@
+{
+  "Errors": null,
+  "Goroutines": [
+    {
+      "ID": 18,
+      "State": "running",
+      "Wait": 0,
+      "LockedToThread": false,
+      "Stack": [
+        {
+          "Func": "main.printStack",
+          "File": "/Users/nick.ripley/repos/gostackparse/test-fixtures/go121_createdby.go",
+          "Line": 23
+        },
+        {
+          "Func": "main.main.func1",
+          "File": "/Users/nick.ripley/repos/gostackparse/test-fixtures/go121_createdby.go",
+          "Line": 16
+        }
+      ],
+      "FramesElided": false,
+      "CreatedBy": {
+        "Func": "main.main",
+        "File": "/Users/nick.ripley/repos/gostackparse/test-fixtures/go121_createdby.go",
+        "Line": 14
+      }
+    },
+    {
+      "ID": 1,
+      "State": "semacquire",
+      "Wait": 0,
+      "LockedToThread": false,
+      "Stack": [
+        {
+          "Func": "sync.runtime_Semacquire",
+          "File": "/Users/nick.ripley/repos/go/src/runtime/sema.go",
+          "Line": 62
+        },
+        {
+          "Func": "sync.(*WaitGroup).Wait",
+          "File": "/Users/nick.ripley/repos/go/src/sync/waitgroup.go",
+          "Line": 116
+        },
+        {
+          "Func": "main.main",
+          "File": "/Users/nick.ripley/repos/gostackparse/test-fixtures/go121_createdby.go",
+          "Line": 18
+        }
+      ],
+      "FramesElided": false,
+      "CreatedBy": null
+    }
+  ]
+}
