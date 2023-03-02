@@ -49,7 +49,7 @@ func TestParse_GoldenFiles(t *testing.T) {
 			ioutil.WriteFile(golden, actual, 0644)
 		}
 		expected, _ := ioutil.ReadFile(golden)
-		require.True(t, bytes.Equal(actual, expected), golden)
+		require.JSONEq(t, string(expected), string(actual))
 	}
 }
 

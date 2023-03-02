@@ -1,0 +1,15 @@
+goroutine 18 [running]:
+main.printStack()
+	/Users/nick.ripley/repos/gostackparse/test-fixtures/go121_createdby.go:23 +0x40
+main.main.func1()
+	/Users/nick.ripley/repos/gostackparse/test-fixtures/go121_createdby.go:16 +0x4c
+created by main.main in goroutine 1
+	/Users/nick.ripley/repos/gostackparse/test-fixtures/go121_createdby.go:14 +0x70
+
+goroutine 1 [semacquire]:
+sync.runtime_Semacquire(0x140000021a0?)
+	/Users/nick.ripley/repos/go/src/runtime/sema.go:62 +0x2c
+sync.(*WaitGroup).Wait(0x1400011a010)
+	/Users/nick.ripley/repos/go/src/sync/waitgroup.go:116 +0x74
+main.main()
+	/Users/nick.ripley/repos/gostackparse/test-fixtures/go121_createdby.go:18 +0x78
