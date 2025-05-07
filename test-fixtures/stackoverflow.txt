@@ -1,0 +1,283 @@
+
+runtime stack:
+runtime.throw({0x4c7520?, 0x200000008?})
+	runtime/panic.go:1101 +0x48 fp=0x7ffc6b27f160 sp=0x7ffc6b27f130 pc=0x468ae8
+runtime.newstack()
+	runtime/stack.go:1107 +0x5bb fp=0x7ffc6b27f298 sp=0x7ffc6b27f160 pc=0x4513fb
+runtime.morestack()
+	runtime/asm_amd64.s:621 +0x7a fp=0x7ffc6b27f2a0 sp=0x7ffc6b27f298 pc=0x46d4da
+
+goroutine 6 gp=0xc0000036c0 m=0 mp=0x579480 [running]:
+main.overflow()
+	./stackoverflow.go:54 +0x16 fp=0xc00010e3a0 sp=0xc00010e398 pc=0x4a0056
+main.overflow()
+	./stackoverflow.go:55 +0xf fp=0xc00010e3b0 sp=0xc00010e3a0 pc=0x4a004f
+main.overflow()
+	./stackoverflow.go:55 +0xf fp=0xc00010e3c0 sp=0xc00010e3b0 pc=0x4a004f
+main.overflow()
+	./stackoverflow.go:55 +0xf fp=0xc00010e3d0 sp=0xc00010e3c0 pc=0x4a004f
+main.overflow()
+	./stackoverflow.go:55 +0xf fp=0xc00010e3e0 sp=0xc00010e3d0 pc=0x4a004f
+main.overflow()
+	./stackoverflow.go:55 +0xf fp=0xc00010e3f0 sp=0xc00010e3e0 pc=0x4a004f
+main.overflow()
+	./stackoverflow.go:55 +0xf fp=0xc00010e400 sp=0xc00010e3f0 pc=0x4a004f
+main.overflow()
+	./stackoverflow.go:55 +0xf fp=0xc00010e410 sp=0xc00010e400 pc=0x4a004f
+main.overflow()
+	./stackoverflow.go:55 +0xf fp=0xc00010e420 sp=0xc00010e410 pc=0x4a004f
+main.overflow()
+	./stackoverflow.go:55 +0xf fp=0xc00010e430 sp=0xc00010e420 pc=0x4a004f
+main.overflow()
+	./stackoverflow.go:55 +0xf fp=0xc00010e440 sp=0xc00010e430 pc=0x4a004f
+main.overflow()
+	./stackoverflow.go:55 +0xf fp=0xc00010e450 sp=0xc00010e440 pc=0x4a004f
+main.overflow()
+	./stackoverflow.go:55 +0xf fp=0xc00010e460 sp=0xc00010e450 pc=0x4a004f
+main.overflow()
+	./stackoverflow.go:55 +0xf fp=0xc00010e470 sp=0xc00010e460 pc=0x4a004f
+main.overflow()
+	./stackoverflow.go:55 +0xf fp=0xc00010e480 sp=0xc00010e470 pc=0x4a004f
+main.overflow()
+	./stackoverflow.go:55 +0xf fp=0xc00010e490 sp=0xc00010e480 pc=0x4a004f
+main.overflow()
+	./stackoverflow.go:55 +0xf fp=0xc00010e4a0 sp=0xc00010e490 pc=0x4a004f
+main.overflow()
+	./stackoverflow.go:55 +0xf fp=0xc00010e4b0 sp=0xc00010e4a0 pc=0x4a004f
+main.overflow()
+	./stackoverflow.go:55 +0xf fp=0xc00010e4c0 sp=0xc00010e4b0 pc=0x4a004f
+main.overflow()
+	./stackoverflow.go:55 +0xf fp=0xc00010e4d0 sp=0xc00010e4c0 pc=0x4a004f
+main.overflow()
+	./stackoverflow.go:55 +0xf fp=0xc00010e4e0 sp=0xc00010e4d0 pc=0x4a004f
+main.overflow()
+	./stackoverflow.go:55 +0xf fp=0xc00010e4f0 sp=0xc00010e4e0 pc=0x4a004f
+main.overflow()
+	./stackoverflow.go:55 +0xf fp=0xc00010e500 sp=0xc00010e4f0 pc=0x4a004f
+main.overflow()
+	./stackoverflow.go:55 +0xf fp=0xc00010e510 sp=0xc00010e500 pc=0x4a004f
+main.overflow()
+	./stackoverflow.go:55 +0xf fp=0xc00010e520 sp=0xc00010e510 pc=0x4a004f
+main.overflow()
+	./stackoverflow.go:55 +0xf fp=0xc00010e530 sp=0xc00010e520 pc=0x4a004f
+main.overflow()
+	./stackoverflow.go:55 +0xf fp=0xc00010e540 sp=0xc00010e530 pc=0x4a004f
+main.overflow()
+	./stackoverflow.go:55 +0xf fp=0xc00010e550 sp=0xc00010e540 pc=0x4a004f
+main.overflow()
+	./stackoverflow.go:55 +0xf fp=0xc00010e560 sp=0xc00010e550 pc=0x4a004f
+main.overflow()
+	./stackoverflow.go:55 +0xf fp=0xc00010e570 sp=0xc00010e560 pc=0x4a004f
+main.overflow()
+	./stackoverflow.go:55 +0xf fp=0xc00010e580 sp=0xc00010e570 pc=0x4a004f
+main.overflow()
+	./stackoverflow.go:55 +0xf fp=0xc00010e590 sp=0xc00010e580 pc=0x4a004f
+main.overflow()
+	./stackoverflow.go:55 +0xf fp=0xc00010e5a0 sp=0xc00010e590 pc=0x4a004f
+main.overflow()
+	./stackoverflow.go:55 +0xf fp=0xc00010e5b0 sp=0xc00010e5a0 pc=0x4a004f
+main.overflow()
+	./stackoverflow.go:55 +0xf fp=0xc00010e5c0 sp=0xc00010e5b0 pc=0x4a004f
+main.overflow()
+	./stackoverflow.go:55 +0xf fp=0xc00010e5d0 sp=0xc00010e5c0 pc=0x4a004f
+main.overflow()
+	./stackoverflow.go:55 +0xf fp=0xc00010e5e0 sp=0xc00010e5d0 pc=0x4a004f
+main.overflow()
+	./stackoverflow.go:55 +0xf fp=0xc00010e5f0 sp=0xc00010e5e0 pc=0x4a004f
+main.overflow()
+	./stackoverflow.go:55 +0xf fp=0xc00010e600 sp=0xc00010e5f0 pc=0x4a004f
+main.overflow()
+	./stackoverflow.go:55 +0xf fp=0xc00010e610 sp=0xc00010e600 pc=0x4a004f
+main.overflow()
+	./stackoverflow.go:55 +0xf fp=0xc00010e620 sp=0xc00010e610 pc=0x4a004f
+main.overflow()
+	./stackoverflow.go:55 +0xf fp=0xc00010e630 sp=0xc00010e620 pc=0x4a004f
+main.overflow()
+	./stackoverflow.go:55 +0xf fp=0xc00010e640 sp=0xc00010e630 pc=0x4a004f
+main.overflow()
+	./stackoverflow.go:55 +0xf fp=0xc00010e650 sp=0xc00010e640 pc=0x4a004f
+main.overflow()
+	./stackoverflow.go:55 +0xf fp=0xc00010e660 sp=0xc00010e650 pc=0x4a004f
+main.overflow()
+	./stackoverflow.go:55 +0xf fp=0xc00010e670 sp=0xc00010e660 pc=0x4a004f
+main.overflow()
+	./stackoverflow.go:55 +0xf fp=0xc00010e680 sp=0xc00010e670 pc=0x4a004f
+main.overflow()
+	./stackoverflow.go:55 +0xf fp=0xc00010e690 sp=0xc00010e680 pc=0x4a004f
+main.overflow()
+	./stackoverflow.go:55 +0xf fp=0xc00010e6a0 sp=0xc00010e690 pc=0x4a004f
+main.overflow()
+	./stackoverflow.go:55 +0xf fp=0xc00010e6b0 sp=0xc00010e6a0 pc=0x4a004f
+...864 frames elided...
+main.overflow()
+	./stackoverflow.go:55 +0xf fp=0xc000111cc0 sp=0xc000111cb0 pc=0x4a004f
+main.overflow()
+	./stackoverflow.go:55 +0xf fp=0xc000111cd0 sp=0xc000111cc0 pc=0x4a004f
+main.overflow()
+	./stackoverflow.go:55 +0xf fp=0xc000111ce0 sp=0xc000111cd0 pc=0x4a004f
+main.overflow()
+	./stackoverflow.go:55 +0xf fp=0xc000111cf0 sp=0xc000111ce0 pc=0x4a004f
+main.overflow()
+	./stackoverflow.go:55 +0xf fp=0xc000111d00 sp=0xc000111cf0 pc=0x4a004f
+main.overflow()
+	./stackoverflow.go:55 +0xf fp=0xc000111d10 sp=0xc000111d00 pc=0x4a004f
+main.overflow()
+	./stackoverflow.go:55 +0xf fp=0xc000111d20 sp=0xc000111d10 pc=0x4a004f
+main.overflow()
+	./stackoverflow.go:55 +0xf fp=0xc000111d30 sp=0xc000111d20 pc=0x4a004f
+main.overflow()
+	./stackoverflow.go:55 +0xf fp=0xc000111d40 sp=0xc000111d30 pc=0x4a004f
+main.overflow()
+	./stackoverflow.go:55 +0xf fp=0xc000111d50 sp=0xc000111d40 pc=0x4a004f
+main.overflow()
+	./stackoverflow.go:55 +0xf fp=0xc000111d60 sp=0xc000111d50 pc=0x4a004f
+main.overflow()
+	./stackoverflow.go:55 +0xf fp=0xc000111d70 sp=0xc000111d60 pc=0x4a004f
+main.overflow()
+	./stackoverflow.go:55 +0xf fp=0xc000111d80 sp=0xc000111d70 pc=0x4a004f
+main.overflow()
+	./stackoverflow.go:55 +0xf fp=0xc000111d90 sp=0xc000111d80 pc=0x4a004f
+main.overflow()
+	./stackoverflow.go:55 +0xf fp=0xc000111da0 sp=0xc000111d90 pc=0x4a004f
+main.overflow()
+	./stackoverflow.go:55 +0xf fp=0xc000111db0 sp=0xc000111da0 pc=0x4a004f
+main.overflow()
+	./stackoverflow.go:55 +0xf fp=0xc000111dc0 sp=0xc000111db0 pc=0x4a004f
+main.overflow()
+	./stackoverflow.go:55 +0xf fp=0xc000111dd0 sp=0xc000111dc0 pc=0x4a004f
+main.overflow()
+	./stackoverflow.go:55 +0xf fp=0xc000111de0 sp=0xc000111dd0 pc=0x4a004f
+main.overflow()
+	./stackoverflow.go:55 +0xf fp=0xc000111df0 sp=0xc000111de0 pc=0x4a004f
+main.overflow()
+	./stackoverflow.go:55 +0xf fp=0xc000111e00 sp=0xc000111df0 pc=0x4a004f
+main.overflow()
+	./stackoverflow.go:55 +0xf fp=0xc000111e10 sp=0xc000111e00 pc=0x4a004f
+main.overflow()
+	./stackoverflow.go:55 +0xf fp=0xc000111e20 sp=0xc000111e10 pc=0x4a004f
+main.overflow()
+	./stackoverflow.go:55 +0xf fp=0xc000111e30 sp=0xc000111e20 pc=0x4a004f
+main.overflow()
+	./stackoverflow.go:55 +0xf fp=0xc000111e40 sp=0xc000111e30 pc=0x4a004f
+main.overflow()
+	./stackoverflow.go:55 +0xf fp=0xc000111e50 sp=0xc000111e40 pc=0x4a004f
+main.overflow()
+	./stackoverflow.go:55 +0xf fp=0xc000111e60 sp=0xc000111e50 pc=0x4a004f
+main.overflow()
+	./stackoverflow.go:55 +0xf fp=0xc000111e70 sp=0xc000111e60 pc=0x4a004f
+main.overflow()
+	./stackoverflow.go:55 +0xf fp=0xc000111e80 sp=0xc000111e70 pc=0x4a004f
+main.overflow()
+	./stackoverflow.go:55 +0xf fp=0xc000111e90 sp=0xc000111e80 pc=0x4a004f
+main.overflow()
+	./stackoverflow.go:55 +0xf fp=0xc000111ea0 sp=0xc000111e90 pc=0x4a004f
+main.overflow()
+	./stackoverflow.go:55 +0xf fp=0xc000111eb0 sp=0xc000111ea0 pc=0x4a004f
+main.overflow()
+	./stackoverflow.go:55 +0xf fp=0xc000111ec0 sp=0xc000111eb0 pc=0x4a004f
+main.overflow()
+	./stackoverflow.go:55 +0xf fp=0xc000111ed0 sp=0xc000111ec0 pc=0x4a004f
+main.overflow()
+	./stackoverflow.go:55 +0xf fp=0xc000111ee0 sp=0xc000111ed0 pc=0x4a004f
+main.overflow()
+	./stackoverflow.go:55 +0xf fp=0xc000111ef0 sp=0xc000111ee0 pc=0x4a004f
+main.overflow()
+	./stackoverflow.go:55 +0xf fp=0xc000111f00 sp=0xc000111ef0 pc=0x4a004f
+main.overflow()
+	./stackoverflow.go:55 +0xf fp=0xc000111f10 sp=0xc000111f00 pc=0x4a004f
+main.overflow()
+	./stackoverflow.go:55 +0xf fp=0xc000111f20 sp=0xc000111f10 pc=0x4a004f
+main.overflow()
+	./stackoverflow.go:55 +0xf fp=0xc000111f30 sp=0xc000111f20 pc=0x4a004f
+main.overflow()
+	./stackoverflow.go:55 +0xf fp=0xc000111f40 sp=0xc000111f30 pc=0x4a004f
+main.overflow()
+	./stackoverflow.go:55 +0xf fp=0xc000111f50 sp=0xc000111f40 pc=0x4a004f
+main.overflow()
+	./stackoverflow.go:55 +0xf fp=0xc000111f60 sp=0xc000111f50 pc=0x4a004f
+main.overflow()
+	./stackoverflow.go:55 +0xf fp=0xc000111f70 sp=0xc000111f60 pc=0x4a004f
+main.overflow()
+	./stackoverflow.go:55 +0xf fp=0xc000111f80 sp=0xc000111f70 pc=0x4a004f
+main.overflow()
+	./stackoverflow.go:55 +0xf fp=0xc000111f90 sp=0xc000111f80 pc=0x4a004f
+main.overflow()
+	./stackoverflow.go:55 +0xf fp=0xc000111fa0 sp=0xc000111f90 pc=0x4a004f
+main.overflow()
+	./stackoverflow.go:55 +0xf fp=0xc000111fb0 sp=0xc000111fa0 pc=0x4a004f
+main.main.func1()
+	./stackoverflow.go:28 +0x45 fp=0xc000111fe0 sp=0xc000111fb0 pc=0x49ffa5
+runtime.goexit({})
+	runtime/asm_amd64.s:1700 +0x1 fp=0xc000111fe8 sp=0xc000111fe0 pc=0x46f201
+created by main.main in goroutine 1
+	./stackoverflow.go:26 +0xf1
+
+goroutine 1 gp=0xc000002380 m=nil [sync.WaitGroup.Wait]:
+runtime.gopark(0xc000092e28?, 0x411b34?, 0x0?, 0x0?, 0xc000092e00?)
+	runtime/proc.go:435 +0xce fp=0xc000092dc8 sp=0xc000092da8 pc=0x468bce
+runtime.goparkunlock(...)
+	runtime/proc.go:441
+runtime.semacquire1(0xc000010108, 0x0, 0x1, 0x0, 0x18)
+	runtime/sema.go:188 +0x21d fp=0xc000092e30 sp=0xc000092dc8 pc=0x44bf3d
+sync.runtime_SemacquireWaitGroup(0xc0000121f0?)
+	runtime/sema.go:110 +0x25 fp=0xc000092e68 sp=0xc000092e30 pc=0x469b85
+sync.(*WaitGroup).Wait(0xc0000801e0?)
+	sync/waitgroup.go:118 +0x48 fp=0xc000092e90 sp=0xc000092e68 pc=0x4745a8
+main.main()
+	./stackoverflow.go:30 +0xfe fp=0xc000092f50 sp=0xc000092e90 pc=0x49fcbe
+runtime.main()
+	runtime/proc.go:283 +0x28b fp=0xc000092fe0 sp=0xc000092f50 pc=0x438bcb
+runtime.goexit({})
+	runtime/asm_amd64.s:1700 +0x1 fp=0xc000092fe8 sp=0xc000092fe0 pc=0x46f201
+
+goroutine 2 gp=0xc0000028c0 m=nil [force gc (idle)]:
+runtime.gopark(0x0?, 0x0?, 0x0?, 0x0?, 0x0?)
+	runtime/proc.go:435 +0xce fp=0xc00005efa8 sp=0xc00005ef88 pc=0x468bce
+runtime.goparkunlock(...)
+	runtime/proc.go:441
+runtime.forcegchelper()
+	runtime/proc.go:348 +0xb3 fp=0xc00005efe0 sp=0xc00005efa8 pc=0x438f13
+runtime.goexit({})
+	runtime/asm_amd64.s:1700 +0x1 fp=0xc00005efe8 sp=0xc00005efe0 pc=0x46f201
+created by runtime.init.7 in goroutine 1
+	runtime/proc.go:336 +0x1a
+
+goroutine 3 gp=0xc000002e00 m=nil [GC sweep wait]:
+runtime.gopark(0x0?, 0x0?, 0x0?, 0x0?, 0x0?)
+	runtime/proc.go:435 +0xce fp=0xc00005f780 sp=0xc00005f760 pc=0x468bce
+runtime.goparkunlock(...)
+	runtime/proc.go:441
+runtime.bgsweep(0xc000018080)
+	runtime/mgcsweep.go:276 +0x94 fp=0xc00005f7c8 sp=0xc00005f780 pc=0x424794
+runtime.gcenable.gowrap1()
+	runtime/mgc.go:204 +0x25 fp=0xc00005f7e0 sp=0xc00005f7c8 pc=0x418ec5
+runtime.goexit({})
+	runtime/asm_amd64.s:1700 +0x1 fp=0xc00005f7e8 sp=0xc00005f7e0 pc=0x46f201
+created by runtime.gcenable in goroutine 1
+	runtime/mgc.go:204 +0x66
+
+goroutine 4 gp=0xc000002fc0 m=nil [GC scavenge wait]:
+runtime.gopark(0xc000018080?, 0x4ebc28?, 0x1?, 0x0?, 0xc000002fc0?)
+	runtime/proc.go:435 +0xce fp=0xc00005ff78 sp=0xc00005ff58 pc=0x468bce
+runtime.goparkunlock(...)
+	runtime/proc.go:441
+runtime.(*scavengerState).park(0x5785e0)
+	runtime/mgcscavenge.go:425 +0x49 fp=0xc00005ffa8 sp=0xc00005ff78 pc=0x422249
+runtime.bgscavenge(0xc000018080)
+	runtime/mgcscavenge.go:653 +0x3c fp=0xc00005ffc8 sp=0xc00005ffa8 pc=0x4227bc
+runtime.gcenable.gowrap2()
+	runtime/mgc.go:205 +0x25 fp=0xc00005ffe0 sp=0xc00005ffc8 pc=0x418e65
+runtime.goexit({})
+	runtime/asm_amd64.s:1700 +0x1 fp=0xc00005ffe8 sp=0xc00005ffe0 pc=0x46f201
+created by runtime.gcenable in goroutine 1
+	runtime/mgc.go:205 +0xa5
+
+goroutine 5 gp=0xc000003500 m=nil [finalizer wait]:
+runtime.gopark(0x598cc0?, 0x490013?, 0x78?, 0xe6?, 0x41119e?)
+	runtime/proc.go:435 +0xce fp=0xc00005e630 sp=0xc00005e610 pc=0x468bce
+runtime.runfinq()
+	runtime/mfinal.go:196 +0x107 fp=0xc00005e7e0 sp=0xc00005e630 pc=0x417e87
+runtime.goexit({})
+	runtime/asm_amd64.s:1700 +0x1 fp=0xc00005e7e8 sp=0xc00005e7e0 pc=0x46f201
+created by runtime.createfing in goroutine 1
+	runtime/mfinal.go:166 +0x3d
