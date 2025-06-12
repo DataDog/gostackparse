@@ -83,7 +83,13 @@ func Parse(r io.Reader) ([]*Goroutine, []error) {
 				goroutines = append(goroutines, g)
 			}
 			if state == stateOriginatingFrom {
-				ancestorIDStr := line[len(originatingFromPrefix) : len(line)-2]
+				// A truncated line that starts with "[originating from goroutine " but doesn't contain anything else afterwards
+				endOfIDStr := len(line) - 2
+				if endOfIDStr < len(originatingFromPrefix) {
+					abortGoroutine("invalid originating from goroutine id")
+					continue
+				}
+				ancestorIDStr := line[len(originatingFromPrefix):endOfIDStr]
 				ancestorID, err := strconv.Atoi(string(ancestorIDStr))
 				if err != nil {
 					abortGoroutine(err.Error())
