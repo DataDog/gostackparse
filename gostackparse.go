@@ -83,7 +83,12 @@ func Parse(r io.Reader) ([]*Goroutine, []error) {
 				goroutines = append(goroutines, g)
 			}
 			if state == stateOriginatingFrom {
-				ancestorIDStr := line[len(originatingFromPrefix) : len(line)-2]
+				// Make sure we capture only the ID that we need. If it's truncated,
+				// it'll be handled by the error check below
+				ancestorIDStr := bytes.TrimSuffix(
+					bytes.TrimPrefix(line, originatingFromPrefix),
+					[]byte("]:"),
+				)
 				ancestorID, err := strconv.Atoi(string(ancestorIDStr))
 				if err != nil {
 					abortGoroutine(err.Error())

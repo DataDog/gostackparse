@@ -7,6 +7,7 @@ package gostackparse
 
 import (
 	"bytes"
+	"embed"
 	"encoding/json"
 	"flag"
 	"fmt"
@@ -359,6 +360,49 @@ func BenchmarkGostackparse(b *testing.B) {
 
 	mbPerSec := float64(parsedBytes) / time.Since(start).Seconds() / 1024 / 1024
 	b.ReportMetric(mbPerSec, "MiB/s")
+}
+
+// Using go:embed to load test fixtures into memory, so the internal fuzzing infra doesn't need to handle individual files
+// along with the fuzzer binary.
+//
+//go:embed test-fixtures/*.txt
+var testFixtures embed.FS
+
+func FuzzParse(f *testing.F) {
+	files, err := testFixtures.ReadDir("test-fixtures")
+	require.NoError(f, err)
+
+	for _, file := range files {
+		if strings.HasSuffix(file.Name(), ".txt") {
+			body, err := testFixtures.ReadFile(filepath.Join("test-fixtures", file.Name()))
+			require.NoError(f, err)
+			f.Add(body)
+		}
+	}
+	// Regression tests
+	// panic: runtime error: slice bounds out of range [28:26]
+	f.Add([]byte("goroutine 0 [0]:\n0()\n\t:0\n[originating from goroutine "))
+
+	f.Fuzz(func(t *testing.T, data []byte) {
+		gs, err := Parse(bytes.NewReader(data))
+		if err != nil {
+			t.Skip()
+		}
+		// Invariant checks
+		for _, g := range gs {
+			for _, f := range g.Stack {
+				if f.Func == "" {
+					t.Errorf("func is empty: %+v", f)
+				}
+			}
+		}
+	})
+}
+
+// This is a regression test for a panic on a truncated line with an [originating from goroutine prefix.
+func TestCrashRegression(t *testing.T) {
+	crashPayload := []byte("goroutine 0 [0]:\n0()\n\t:0\n[originating from goroutine ")
+	_, _ = Parse(bytes.NewReader(crashPayload))
 }
 
 func TestFuzzCorupus(t *testing.T) {
