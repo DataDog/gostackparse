@@ -1,0 +1,715 @@
+{
+  "Errors": null,
+  "Goroutines": [
+    {
+      "ID": 6,
+      "State": "running",
+      "Wait": 0,
+      "LockedToThread": false,
+      "Stack": [
+        {
+          "Func": "main.overflow",
+          "File": "./stackoverflow.go",
+          "Line": 54
+        },
+        {
+          "Func": "main.overflow",
+          "File": "./stackoverflow.go",
+          "Line": 55
+        },
+        {
+          "Func": "main.overflow",
+          "File": "./stackoverflow.go",
+          "Line": 55
+        },
+        {
+          "Func": "main.overflow",
+          "File": "./stackoverflow.go",
+          "Line": 55
+        },
+        {
+          "Func": "main.overflow",
+          "File": "./stackoverflow.go",
+          "Line": 55
+        },
+        {
+          "Func": "main.overflow",
+          "File": "./stackoverflow.go",
+          "Line": 55
+        },
+        {
+          "Func": "main.overflow",
+          "File": "./stackoverflow.go",
+          "Line": 55
+        },
+        {
+          "Func": "main.overflow",
+          "File": "./stackoverflow.go",
+          "Line": 55
+        },
+        {
+          "Func": "main.overflow",
+          "File": "./stackoverflow.go",
+          "Line": 55
+        },
+        {
+          "Func": "main.overflow",
+          "File": "./stackoverflow.go",
+          "Line": 55
+        },
+        {
+          "Func": "main.overflow",
+          "File": "./stackoverflow.go",
+          "Line": 55
+        },
+        {
+          "Func": "main.overflow",
+          "File": "./stackoverflow.go",
+          "Line": 55
+        },
+        {
+          "Func": "main.overflow",
+          "File": "./stackoverflow.go",
+          "Line": 55
+        },
+        {
+          "Func": "main.overflow",
+          "File": "./stackoverflow.go",
+          "Line": 55
+        },
+        {
+          "Func": "main.overflow",
+          "File": "./stackoverflow.go",
+          "Line": 55
+        },
+        {
+          "Func": "main.overflow",
+          "File": "./stackoverflow.go",
+          "Line": 55
+        },
+        {
+          "Func": "main.overflow",
+          "File": "./stackoverflow.go",
+          "Line": 55
+        },
+        {
+          "Func": "main.overflow",
+          "File": "./stackoverflow.go",
+          "Line": 55
+        },
+        {
+          "Func": "main.overflow",
+          "File": "./stackoverflow.go",
+          "Line": 55
+        },
+        {
+          "Func": "main.overflow",
+          "File": "./stackoverflow.go",
+          "Line": 55
+        },
+        {
+          "Func": "main.overflow",
+          "File": "./stackoverflow.go",
+          "Line": 55
+        },
+        {
+          "Func": "main.overflow",
+          "File": "./stackoverflow.go",
+          "Line": 55
+        },
+        {
+          "Func": "main.overflow",
+          "File": "./stackoverflow.go",
+          "Line": 55
+        },
+        {
+          "Func": "main.overflow",
+          "File": "./stackoverflow.go",
+          "Line": 55
+        },
+        {
+          "Func": "main.overflow",
+          "File": "./stackoverflow.go",
+          "Line": 55
+        },
+        {
+          "Func": "main.overflow",
+          "File": "./stackoverflow.go",
+          "Line": 55
+        },
+        {
+          "Func": "main.overflow",
+          "File": "./stackoverflow.go",
+          "Line": 55
+        },
+        {
+          "Func": "main.overflow",
+          "File": "./stackoverflow.go",
+          "Line": 55
+        },
+        {
+          "Func": "main.overflow",
+          "File": "./stackoverflow.go",
+          "Line": 55
+        },
+        {
+          "Func": "main.overflow",
+          "File": "./stackoverflow.go",
+          "Line": 55
+        },
+        {
+          "Func": "main.overflow",
+          "File": "./stackoverflow.go",
+          "Line": 55
+        },
+        {
+          "Func": "main.overflow",
+          "File": "./stackoverflow.go",
+          "Line": 55
+        },
+        {
+          "Func": "main.overflow",
+          "File": "./stackoverflow.go",
+          "Line": 55
+        },
+        {
+          "Func": "main.overflow",
+          "File": "./stackoverflow.go",
+          "Line": 55
+        },
+        {
+          "Func": "main.overflow",
+          "File": "./stackoverflow.go",
+          "Line": 55
+        },
+        {
+          "Func": "main.overflow",
+          "File": "./stackoverflow.go",
+          "Line": 55
+        },
+        {
+          "Func": "main.overflow",
+          "File": "./stackoverflow.go",
+          "Line": 55
+        },
+        {
+          "Func": "main.overflow",
+          "File": "./stackoverflow.go",
+          "Line": 55
+        },
+        {
+          "Func": "main.overflow",
+          "File": "./stackoverflow.go",
+          "Line": 55
+        },
+        {
+          "Func": "main.overflow",
+          "File": "./stackoverflow.go",
+          "Line": 55
+        },
+        {
+          "Func": "main.overflow",
+          "File": "./stackoverflow.go",
+          "Line": 55
+        },
+        {
+          "Func": "main.overflow",
+          "File": "./stackoverflow.go",
+          "Line": 55
+        },
+        {
+          "Func": "main.overflow",
+          "File": "./stackoverflow.go",
+          "Line": 55
+        },
+        {
+          "Func": "main.overflow",
+          "File": "./stackoverflow.go",
+          "Line": 55
+        },
+        {
+          "Func": "main.overflow",
+          "File": "./stackoverflow.go",
+          "Line": 55
+        },
+        {
+          "Func": "main.overflow",
+          "File": "./stackoverflow.go",
+          "Line": 55
+        },
+        {
+          "Func": "main.overflow",
+          "File": "./stackoverflow.go",
+          "Line": 55
+        },
+        {
+          "Func": "main.overflow",
+          "File": "./stackoverflow.go",
+          "Line": 55
+        },
+        {
+          "Func": "main.overflow",
+          "File": "./stackoverflow.go",
+          "Line": 55
+        },
+        {
+          "Func": "main.overflow",
+          "File": "./stackoverflow.go",
+          "Line": 55
+        },
+        {
+          "Func": "main.overflow",
+          "File": "./stackoverflow.go",
+          "Line": 55
+        },
+        {
+          "Func": "main.overflow",
+          "File": "./stackoverflow.go",
+          "Line": 55
+        },
+        {
+          "Func": "main.overflow",
+          "File": "./stackoverflow.go",
+          "Line": 55
+        },
+        {
+          "Func": "main.overflow",
+          "File": "./stackoverflow.go",
+          "Line": 55
+        },
+        {
+          "Func": "main.overflow",
+          "File": "./stackoverflow.go",
+          "Line": 55
+        },
+        {
+          "Func": "main.overflow",
+          "File": "./stackoverflow.go",
+          "Line": 55
+        },
+        {
+          "Func": "main.overflow",
+          "File": "./stackoverflow.go",
+          "Line": 55
+        },
+        {
+          "Func": "main.overflow",
+          "File": "./stackoverflow.go",
+          "Line": 55
+        },
+        {
+          "Func": "main.overflow",
+          "File": "./stackoverflow.go",
+          "Line": 55
+        },
+        {
+          "Func": "main.overflow",
+          "File": "./stackoverflow.go",
+          "Line": 55
+        },
+        {
+          "Func": "main.overflow",
+          "File": "./stackoverflow.go",
+          "Line": 55
+        },
+        {
+          "Func": "main.overflow",
+          "File": "./stackoverflow.go",
+          "Line": 55
+        },
+        {
+          "Func": "main.overflow",
+          "File": "./stackoverflow.go",
+          "Line": 55
+        },
+        {
+          "Func": "main.overflow",
+          "File": "./stackoverflow.go",
+          "Line": 55
+        },
+        {
+          "Func": "main.overflow",
+          "File": "./stackoverflow.go",
+          "Line": 55
+        },
+        {
+          "Func": "main.overflow",
+          "File": "./stackoverflow.go",
+          "Line": 55
+        },
+        {
+          "Func": "main.overflow",
+          "File": "./stackoverflow.go",
+          "Line": 55
+        },
+        {
+          "Func": "main.overflow",
+          "File": "./stackoverflow.go",
+          "Line": 55
+        },
+        {
+          "Func": "main.overflow",
+          "File": "./stackoverflow.go",
+          "Line": 55
+        },
+        {
+          "Func": "main.overflow",
+          "File": "./stackoverflow.go",
+          "Line": 55
+        },
+        {
+          "Func": "main.overflow",
+          "File": "./stackoverflow.go",
+          "Line": 55
+        },
+        {
+          "Func": "main.overflow",
+          "File": "./stackoverflow.go",
+          "Line": 55
+        },
+        {
+          "Func": "main.overflow",
+          "File": "./stackoverflow.go",
+          "Line": 55
+        },
+        {
+          "Func": "main.overflow",
+          "File": "./stackoverflow.go",
+          "Line": 55
+        },
+        {
+          "Func": "main.overflow",
+          "File": "./stackoverflow.go",
+          "Line": 55
+        },
+        {
+          "Func": "main.overflow",
+          "File": "./stackoverflow.go",
+          "Line": 55
+        },
+        {
+          "Func": "main.overflow",
+          "File": "./stackoverflow.go",
+          "Line": 55
+        },
+        {
+          "Func": "main.overflow",
+          "File": "./stackoverflow.go",
+          "Line": 55
+        },
+        {
+          "Func": "main.overflow",
+          "File": "./stackoverflow.go",
+          "Line": 55
+        },
+        {
+          "Func": "main.overflow",
+          "File": "./stackoverflow.go",
+          "Line": 55
+        },
+        {
+          "Func": "main.overflow",
+          "File": "./stackoverflow.go",
+          "Line": 55
+        },
+        {
+          "Func": "main.overflow",
+          "File": "./stackoverflow.go",
+          "Line": 55
+        },
+        {
+          "Func": "main.overflow",
+          "File": "./stackoverflow.go",
+          "Line": 55
+        },
+        {
+          "Func": "main.overflow",
+          "File": "./stackoverflow.go",
+          "Line": 55
+        },
+        {
+          "Func": "main.overflow",
+          "File": "./stackoverflow.go",
+          "Line": 55
+        },
+        {
+          "Func": "main.overflow",
+          "File": "./stackoverflow.go",
+          "Line": 55
+        },
+        {
+          "Func": "main.overflow",
+          "File": "./stackoverflow.go",
+          "Line": 55
+        },
+        {
+          "Func": "main.overflow",
+          "File": "./stackoverflow.go",
+          "Line": 55
+        },
+        {
+          "Func": "main.overflow",
+          "File": "./stackoverflow.go",
+          "Line": 55
+        },
+        {
+          "Func": "main.overflow",
+          "File": "./stackoverflow.go",
+          "Line": 55
+        },
+        {
+          "Func": "main.overflow",
+          "File": "./stackoverflow.go",
+          "Line": 55
+        },
+        {
+          "Func": "main.overflow",
+          "File": "./stackoverflow.go",
+          "Line": 55
+        },
+        {
+          "Func": "main.overflow",
+          "File": "./stackoverflow.go",
+          "Line": 55
+        },
+        {
+          "Func": "main.overflow",
+          "File": "./stackoverflow.go",
+          "Line": 55
+        },
+        {
+          "Func": "main.overflow",
+          "File": "./stackoverflow.go",
+          "Line": 55
+        },
+        {
+          "Func": "main.overflow",
+          "File": "./stackoverflow.go",
+          "Line": 55
+        },
+        {
+          "Func": "main.overflow",
+          "File": "./stackoverflow.go",
+          "Line": 55
+        },
+        {
+          "Func": "main.overflow",
+          "File": "./stackoverflow.go",
+          "Line": 55
+        },
+        {
+          "Func": "main.main.func1",
+          "File": "./stackoverflow.go",
+          "Line": 28
+        },
+        {
+          "Func": "runtime.goexit",
+          "File": "runtime/asm_amd64.s",
+          "Line": 1700
+        }
+      ],
+      "FramesElided": true,
+      "CreatedBy": {
+        "Func": "main.main",
+        "File": "./stackoverflow.go",
+        "Line": 26
+      }
+    },
+    {
+      "ID": 1,
+      "State": "sync.WaitGroup.Wait",
+      "Wait": 0,
+      "LockedToThread": false,
+      "Stack": [
+        {
+          "Func": "runtime.gopark",
+          "File": "runtime/proc.go",
+          "Line": 435
+        },
+        {
+          "Func": "runtime.goparkunlock",
+          "File": "runtime/proc.go",
+          "Line": 441
+        },
+        {
+          "Func": "runtime.semacquire1",
+          "File": "runtime/sema.go",
+          "Line": 188
+        },
+        {
+          "Func": "sync.runtime_SemacquireWaitGroup",
+          "File": "runtime/sema.go",
+          "Line": 110
+        },
+        {
+          "Func": "sync.(*WaitGroup).Wait",
+          "File": "sync/waitgroup.go",
+          "Line": 118
+        },
+        {
+          "Func": "main.main",
+          "File": "./stackoverflow.go",
+          "Line": 30
+        },
+        {
+          "Func": "runtime.main",
+          "File": "runtime/proc.go",
+          "Line": 283
+        },
+        {
+          "Func": "runtime.goexit",
+          "File": "runtime/asm_amd64.s",
+          "Line": 1700
+        }
+      ],
+      "FramesElided": false,
+      "CreatedBy": null
+    },
+    {
+      "ID": 2,
+      "State": "force gc (idle)",
+      "Wait": 0,
+      "LockedToThread": false,
+      "Stack": [
+        {
+          "Func": "runtime.gopark",
+          "File": "runtime/proc.go",
+          "Line": 435
+        },
+        {
+          "Func": "runtime.goparkunlock",
+          "File": "runtime/proc.go",
+          "Line": 441
+        },
+        {
+          "Func": "runtime.forcegchelper",
+          "File": "runtime/proc.go",
+          "Line": 348
+        },
+        {
+          "Func": "runtime.goexit",
+          "File": "runtime/asm_amd64.s",
+          "Line": 1700
+        }
+      ],
+      "FramesElided": false,
+      "CreatedBy": {
+        "Func": "runtime.init.7",
+        "File": "runtime/proc.go",
+        "Line": 336
+      }
+    },
+    {
+      "ID": 3,
+      "State": "GC sweep wait",
+      "Wait": 0,
+      "LockedToThread": false,
+      "Stack": [
+        {
+          "Func": "runtime.gopark",
+          "File": "runtime/proc.go",
+          "Line": 435
+        },
+        {
+          "Func": "runtime.goparkunlock",
+          "File": "runtime/proc.go",
+          "Line": 441
+        },
+        {
+          "Func": "runtime.bgsweep",
+          "File": "runtime/mgcsweep.go",
+          "Line": 276
+        },
+        {
+          "Func": "runtime.gcenable.gowrap1",
+          "File": "runtime/mgc.go",
+          "Line": 204
+        },
+        {
+          "Func": "runtime.goexit",
+          "File": "runtime/asm_amd64.s",
+          "Line": 1700
+        }
+      ],
+      "FramesElided": false,
+      "CreatedBy": {
+        "Func": "runtime.gcenable",
+        "File": "runtime/mgc.go",
+        "Line": 204
+      }
+    },
+    {
+      "ID": 4,
+      "State": "GC scavenge wait",
+      "Wait": 0,
+      "LockedToThread": false,
+      "Stack": [
+        {
+          "Func": "runtime.gopark",
+          "File": "runtime/proc.go",
+          "Line": 435
+        },
+        {
+          "Func": "runtime.goparkunlock",
+          "File": "runtime/proc.go",
+          "Line": 441
+        },
+        {
+          "Func": "runtime.(*scavengerState).park",
+          "File": "runtime/mgcscavenge.go",
+          "Line": 425
+        },
+        {
+          "Func": "runtime.bgscavenge",
+          "File": "runtime/mgcscavenge.go",
+          "Line": 653
+        },
+        {
+          "Func": "runtime.gcenable.gowrap2",
+          "File": "runtime/mgc.go",
+          "Line": 205
+        },
+        {
+          "Func": "runtime.goexit",
+          "File": "runtime/asm_amd64.s",
+          "Line": 1700
+        }
+      ],
+      "FramesElided": false,
+      "CreatedBy": {
+        "Func": "runtime.gcenable",
+        "File": "runtime/mgc.go",
+        "Line": 205
+      }
+    },
+    {
+      "ID": 5,
+      "State": "finalizer wait",
+      "Wait": 0,
+      "LockedToThread": false,
+      "Stack": [
+        {
+          "Func": "runtime.gopark",
+          "File": "runtime/proc.go",
+          "Line": 435
+        },
+        {
+          "Func": "runtime.runfinq",
+          "File": "runtime/mfinal.go",
+          "Line": 196
+        },
+        {
+          "Func": "runtime.goexit",
+          "File": "runtime/asm_amd64.s",
+          "Line": 1700
+        }
+      ],
+      "FramesElided": false,
+      "CreatedBy": {
+        "Func": "runtime.createfing",
+        "File": "runtime/mfinal.go",
+        "Line": 166
+      }
+    }
+  ]
+}
