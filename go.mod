@@ -2,6 +2,8 @@ module github.com/DataDog/gostackparse
 
 go 1.18
 
+toolchain go1.26.1
+
 require github.com/stretchr/testify v1.11.1
 
 require (
