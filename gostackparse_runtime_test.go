@@ -13,6 +13,7 @@ import (
 	"reflect"
 	"runtime"
 	"runtime/debug"
+	"runtime/pprof"
 	"strings"
 	"sync"
 	"testing"
@@ -133,6 +134,12 @@ func TestHelperProcess(t *testing.T) {
 	switch os.Getenv("GOSTACKPARSE_HELPER") {
 	case "panic":
 		go liveRuntimePanic()
+	case "labels":
+		go func() {
+			ctx := pprof.WithLabels(context.Background(), pprof.Labels("handler", "checkout", "tenant", `acme corp }: ], "quoted"`))
+			pprof.SetGoroutineLabels(ctx)
+			liveRuntimePanic()
+		}()
 	case "overflow":
 		debug.SetMaxStack(64 << 10)
 		go liveRuntimeOverflow(1)
@@ -194,6 +201,8 @@ func liveRuntimeTraceback(t *testing.T, mode, traceback string, ancestors bool) 
 	cmd.Env = append(cmd.Env, "GOSTACKPARSE_HELPER="+mode, "GOTRACEBACK="+traceback)
 	if ancestors {
 		cmd.Env = append(cmd.Env, "GODEBUG=tracebackancestors=3")
+	} else if mode == "labels" {
+		cmd.Env = append(cmd.Env, "GODEBUG=tracebacklabels=1")
 	}
 	var stderr bytes.Buffer
 	cmd.Stderr = &stderr
