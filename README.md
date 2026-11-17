@@ -24,6 +24,9 @@ func main() {
 }
 ```
 
+Use `ParseWithOptions` with `ParseOptions{KeepIncomplete: true}` to keep goroutines with incomplete stacks.
+The parser sets `Incomplete` on these goroutines and still returns errors.
+
 The result is a simple list of [Goroutine](https://pkg.go.dev/github.com/DataDog/gostackparse#Goroutine) structs:
 
 ```
