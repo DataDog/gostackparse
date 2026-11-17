@@ -10,6 +10,7 @@ import (
 	"context"
 	"os"
 	"os/exec"
+	"reflect"
 	"runtime"
 	"runtime/debug"
 	"strings"
@@ -203,6 +204,37 @@ func liveRuntimeTraceback(t *testing.T, mode, traceback string, ancestors bool) 
 		t.Fatalf("missing traceback:\n%s", stderr.Bytes())
 	}
 	return append([]byte("goroutine "), data...)
+}
+
+func TestParseWithOptions_LiveTruncatedCrash(t *testing.T) {
+	data := liveRuntimeTraceback(t, "panic", "all", false)
+	complete, errs := Parse(bytes.NewReader(data))
+	if len(errs) != 0 || len(complete) == 0 || !hasRuntimeFrame(complete[0], ".liveRuntimePanic") {
+		t.Fatalf("parse complete crash: %v", errs)
+	}
+	offset := 0
+	for _, line := range bytes.SplitAfter(data, []byte("\n")) {
+		offset += len(line)
+		if bytes.Contains(line, []byte(".liveRuntimePanic(")) {
+			data = data[:offset+2]
+			break
+		}
+	}
+	defaults, errs := Parse(bytes.NewReader(data))
+	if len(defaults) != 0 || len(errs) != 1 {
+		t.Fatalf("default parse of truncated crash: %d goroutines, %v", len(defaults), errs)
+	}
+	kept, errs := ParseWithOptions(bytes.NewReader(data), ParseOptions{KeepIncomplete: true})
+	if len(kept) != 1 || len(errs) != 1 {
+		t.Fatalf("keep incomplete crash: %d goroutines, %v", len(kept), errs)
+	}
+	want := complete[0]
+	want.Incomplete = true
+	want.Stack = want.Stack[:len(want.Stack)-1]
+	want.CreatedBy = nil
+	if !reflect.DeepEqual(want, kept[0]) {
+		t.Fatalf("truncated crash differs: got %+v, want %+v", kept[0], want)
+	}
 }
 
 func hasRuntimeFrame(g *Goroutine, suffix string) bool {

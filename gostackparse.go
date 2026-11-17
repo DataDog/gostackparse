@@ -37,6 +37,20 @@ const (
 // will also return an error for every goroutine that couldn't be parsed. If
 // all goroutines were parsed successfully, the []error slice is empty.
 func Parse(r io.Reader) ([]*Goroutine, []error) {
+	return ParseWithOptions(r, ParseOptions{})
+}
+
+// ParseOptions configures ParseWithOptions. The zero value gives the same result as Parse.
+type ParseOptions struct {
+	// KeepIncomplete keeps a goroutine whose stack could not be fully parsed,
+	// with the frames parsed before the error, instead of discarding it.
+	// Kept goroutines have Incomplete set. An error is still returned for each one.
+	KeepIncomplete bool
+}
+
+// ParseWithOptions parses a goroutine stack trace dump with the given options.
+// See Parse for the input format and error handling.
+func ParseWithOptions(r io.Reader, opts ParseOptions) ([]*Goroutine, []error) {
 	var (
 		sc      = bufio.NewScanner(r)
 		state   parserState
@@ -56,7 +70,18 @@ func Parse(r io.Reader) ([]*Goroutine, []error) {
 				line,
 			)
 			errs = append(errs, err)
-			goroutines = goroutines[0 : len(goroutines)-1]
+			// An invalid header appends a nil g, which has nothing to keep.
+			if opts.KeepIncomplete && g != nil {
+				goroutines[len(goroutines)-1].Incomplete = true
+				switch state {
+				case stateStackFile:
+					g.Stack = g.Stack[:len(g.Stack)-1]
+				case stateCreatedByFile:
+					g.CreatedBy = nil
+				}
+			} else {
+				goroutines = goroutines[0 : len(goroutines)-1]
+			}
 			state = stateHeader
 		}
 	)
@@ -340,6 +365,10 @@ type Goroutine struct {
 	// additional frames were elided. This happens when the stack depth exceeds
 	// 100.
 	FramesElided bool
+	// Incomplete is true if the parser could not fully parse this goroutine.
+	// Only ParseWithOptions with KeepIncomplete sets it. A stack cut exactly
+	// at a frame boundary cannot be told apart from a complete one.
+	Incomplete bool `json:"Incomplete,omitempty"`
 	// CreatedBy is the frame that created this goroutine, nil for main().
 	CreatedBy *Frame
 	// Ancestors are the Goroutines that created this goroutine.

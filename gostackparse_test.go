@@ -385,8 +385,11 @@ func FuzzParse(f *testing.F) {
 	f.Add([]byte("goroutine 1 gp=0xc000002380 m=0 mp=0x1029c0 [running]:\nmain.main()\n\t/main.go:1\n"))
 
 	f.Fuzz(func(t *testing.T, data []byte) {
-		gs, err := Parse(bytes.NewReader(data))
-		if err != nil {
+		gs, errs := Parse(bytes.NewReader(data))
+		kept, keptErrs := ParseWithOptions(bytes.NewReader(data), ParseOptions{KeepIncomplete: true})
+		require.Equal(t, errs, keptErrs)
+		checkParseSuperset(t, gs, kept)
+		if len(errs) != 0 {
 			t.Skip()
 		}
 		// Invariant checks
