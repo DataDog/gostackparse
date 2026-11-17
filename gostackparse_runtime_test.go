@@ -13,6 +13,7 @@ import (
 	"reflect"
 	"runtime"
 	"runtime/debug"
+	"runtime/pprof"
 	"strings"
 	"sync"
 	"testing"
@@ -95,6 +96,21 @@ func TestParse_LiveRuntime(t *testing.T) {
 	}
 }
 
+func TestParse_LiveRuntimeLabels(t *testing.T) {
+	data := liveRuntimeTraceback(t, "labels", "all", false)
+	header, _, _ := bytes.Cut(data, []byte("\n"))
+	if !bytes.Contains(header, []byte("{")) {
+		t.Skipf("%s does not emit goroutine labels with GODEBUG=tracebacklabels=1", runtime.Version())
+	}
+	gs, errs := Parse(bytes.NewReader(data))
+	if len(errs) != 0 {
+		t.Fatalf("parse labeled traceback: %v", errs)
+	}
+	if len(gs) == 0 || gs[0].State != "running" || !hasRuntimeFrame(gs[0], ".liveRuntimePanic") {
+		t.Fatalf("missing labeled goroutine or its frames: %+v", gs)
+	}
+}
+
 func liveRuntimeChan(stop <-chan struct{}) {
 	<-stop
 }
@@ -131,6 +147,12 @@ func TestHelperProcess(t *testing.T) {
 	switch os.Getenv("GOSTACKPARSE_HELPER") {
 	case "panic":
 		go liveRuntimePanic()
+	case "labels":
+		go func() {
+			ctx := pprof.WithLabels(context.Background(), pprof.Labels("handler", "checkout", "tenant", `acme corp }: ], "quoted"`))
+			pprof.SetGoroutineLabels(ctx)
+			liveRuntimePanic()
+		}()
 	case "overflow":
 		debug.SetMaxStack(64 << 10)
 		go liveRuntimeOverflow(1)
@@ -190,6 +212,8 @@ func liveRuntimeTraceback(t *testing.T, mode, traceback string, ancestors bool) 
 	cmd.Env = append(cmd.Env, "GOSTACKPARSE_HELPER="+mode, "GOTRACEBACK="+traceback)
 	if ancestors {
 		cmd.Env = append(cmd.Env, "GODEBUG=tracebackancestors=3")
+	} else if mode == "labels" {
+		cmd.Env = append(cmd.Env, "GODEBUG=tracebacklabels=1")
 	}
 	var stderr bytes.Buffer
 	cmd.Stderr = &stderr
