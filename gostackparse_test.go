@@ -166,6 +166,34 @@ func TestParseGoroutineHeader_Labels(t *testing.T) {
 	}
 }
 
+func TestParseGoroutineHeader_Synctest(t *testing.T) {
+	for _, state := range []struct {
+		header string
+		wait   time.Duration
+		locked bool
+	}{
+		{"chan receive (durable)", 0, false},
+		{"chan receive (durable), 5 minutes", 5 * time.Minute, false},
+		{"chan receive (durable), locked to thread", 0, true},
+		{"chan receive (durable), 5 minutes, locked to thread", 5 * time.Minute, true},
+	} {
+		for version, header := range map[string]string{
+			"no-labels": "23 [" + state.header + ", synctest bubble 1]:",
+			"go1.26":    "23 [" + state.header + `, synctest bubble 1 labels:{"tenant": "acme corp }: ], \"quoted\""}]:`,
+			"go1.27":    "23 [" + state.header + `, synctest bubble 1] {tenant: "acme corp }: ], \"quoted\""}:`,
+		} {
+			t.Run(version+"/"+state.header, func(t *testing.T) {
+				require.Equal(t, &Goroutine{
+					ID:             23,
+					State:          "chan receive (durable)",
+					Wait:           state.wait,
+					LockedToThread: state.locked,
+				}, parseGoroutineHeader([]byte(header)), header)
+			})
+		}
+	}
+}
+
 type dump struct {
 	header    headerLine
 	stack     []frameLines
@@ -427,6 +455,7 @@ func FuzzParse(f *testing.F) {
 	f.Add([]byte("goroutine 1 gp=0xc000002380 m=0 mp=0x1029c0 [running]:\nmain.main()\n\t/main.go:1\n"))
 	f.Add([]byte("goroutine 7 [sleep] {handler: checkout, tenant: \"acme corp }: ], \\\"quoted\\\"\"}:\nmain.main()\n\t/main.go:1\n"))
 	f.Add([]byte("goroutine 7 [sleep labels:{\"handler\": \"checkout\", \"tenant\": \"acme corp }: ], \\\"quoted\\\"\"}]:\nmain.main()\n\t/main.go:1\n"))
+	f.Add([]byte("goroutine 7 [chan receive (durable), synctest bubble 1]:\nmain.main()\n\t/main.go:1\n"))
 
 	f.Fuzz(func(t *testing.T, data []byte) {
 		gs, errs := Parse(bytes.NewReader(data))

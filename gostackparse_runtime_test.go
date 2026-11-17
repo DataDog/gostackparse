@@ -192,7 +192,7 @@ func liveRuntimeTraceback(t *testing.T, mode, traceback string, ancestors bool) 
 	}
 	ctx, cancel := context.WithTimeout(context.Background(), 15*time.Second)
 	defer cancel()
-	cmd := exec.CommandContext(ctx, exe, "-test.run=^TestHelperProcess$")
+	cmd := exec.CommandContext(ctx, exe, "-test.run=^TestHelperProcess")
 	for _, env := range os.Environ() {
 		if !strings.HasPrefix(env, "GOSTACKPARSE_HELPER=") && !strings.HasPrefix(env, "GOTRACEBACK=") && !strings.HasPrefix(env, "GODEBUG=") {
 			cmd.Env = append(cmd.Env, env)
@@ -203,6 +203,8 @@ func liveRuntimeTraceback(t *testing.T, mode, traceback string, ancestors bool) 
 		cmd.Env = append(cmd.Env, "GODEBUG=tracebackancestors=3")
 	} else if mode == "labels" {
 		cmd.Env = append(cmd.Env, "GODEBUG=tracebacklabels=1")
+	} else if mode == "synctest" {
+		cmd.Env = append(cmd.Env, "GODEBUG=asynctimerchan=0")
 	}
 	var stderr bytes.Buffer
 	cmd.Stderr = &stderr
