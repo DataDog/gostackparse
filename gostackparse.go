@@ -101,7 +101,7 @@ func Parse(r io.Reader) ([]*Goroutine, []error) {
 		case stateStackFunc, stateCreatedByFunc:
 			f = parseFunc(line, state)
 			if f == nil {
-				if bytes.Equal(line, framesElided) {
+				if bytes.HasSuffix(line, framesElidedSuffix) {
 					g.FramesElided = true
 					state = stateCreatedBy
 					continue
@@ -150,11 +150,11 @@ var (
 	goroutinePrefix       = []byte("goroutine ")
 	createdByPrefix       = []byte("created by ")
 	originatingFromPrefix = []byte("[originating from goroutine ")
-	framesElided          = []byte("...additional frames elided...")
+	framesElidedSuffix    = []byte("frames elided...")
 )
 
 var goroutineHeader = regexp.MustCompile(
-	`^(\d+) \[([^,]+)(?:, (\d+) minutes)?(, locked to thread)?\]:$`,
+	`^(\d+) [^[]*\[([^,]+)(?:, (\d+) minutes)?(, locked to thread)?\]:$`,
 )
 
 // parseGoroutineHeader parses a goroutine header line and returns a new
@@ -163,6 +163,7 @@ var goroutineHeader = regexp.MustCompile(
 //
 // Example Input:
 // 1 [chan receive, 6883 minutes]:
+// 1 gp=0xffffffffff m=0 mp=0xffffff [chan receive, 6883 minutes]:
 //
 // Example Output:
 // &Goroutine{ID: 1, State "chan receive", Waitduration: 6883*time.Minute}
