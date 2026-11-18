@@ -382,6 +382,7 @@ func FuzzParse(f *testing.F) {
 	// Regression tests
 	// panic: runtime error: slice bounds out of range [28:26]
 	f.Add([]byte("goroutine 0 [0]:\n0()\n\t:0\n[originating from goroutine "))
+	f.Add([]byte("goroutine 1 gp=0xc000002380 m=0 mp=0x1029c0 [running]:\nmain.main()\n\t/main.go:1\n"))
 
 	f.Fuzz(func(t *testing.T, data []byte) {
 		gs, err := Parse(bytes.NewReader(data))
