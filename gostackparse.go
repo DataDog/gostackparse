@@ -184,7 +184,7 @@ var (
 )
 
 var goroutineHeader = regexp.MustCompile(
-	`^(\d+) [^[]*\[([^,]+)(?:, (\d+) minutes)?(, locked to thread)?\]:$`,
+	`^(\d+) [^[]*\[([^,\]{]+)(?:, (\d+) minutes)?(, locked to thread)?(?:, synctest bubble \d+)?(?: labels:\{.*\})?\](?: \{.*\})?:$`,
 )
 
 // parseGoroutineHeader parses a goroutine header line and returns a new
