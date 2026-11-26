@@ -334,12 +334,18 @@ func parseFile(line []byte, f *Frame) (ret bool) {
 				state = stateFilename
 			}
 		case stateLine:
-			if c == ' ' {
+			// A non-digit means the digits were part of the file name, e.g.
+			// /tmp/dir:123/main.go:2, so the scan for ":line" continues.
+			switch {
+			case c == ' ':
 				return true
-			} else if !isDigit(c) {
-				return false
+			case isDigit(c):
+				f.Line = f.Line*10 + int(c-'0')
+			case c == ':':
+				state, ret = stateColon, false
+			default:
+				state, ret = stateFilename, false
 			}
-			f.Line = f.Line*10 + int(c-'0')
 		}
 
 	}

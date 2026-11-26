@@ -545,6 +545,18 @@ func Test_parseFile(t *testing.T) {
 			},
 			wantReturn: true,
 		},
+		{
+			name:       "colon and digits in a directory",
+			line:       "\t/tmp/dir:123/main.go:2 +0x2c",
+			wantFrame:  Frame{File: "/tmp/dir:123/main.go", Line: 2},
+			wantReturn: true,
+		},
+		{
+			name:       "colon and digits twice",
+			line:       "\t/a:1:2",
+			wantFrame:  Frame{File: "/a:1", Line: 2},
+			wantReturn: true,
+		},
 	}
 	for _, tt := range tests {
 		if len(tt.line) > 1 {
