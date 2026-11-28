@@ -37,6 +37,20 @@ const (
 // will also return an error for every goroutine that couldn't be parsed. If
 // all goroutines were parsed successfully, the []error slice is empty.
 func Parse(r io.Reader) ([]*Goroutine, []error) {
+	return ParseWithOptions(r, ParseOptions{})
+}
+
+// ParseOptions configures ParseWithOptions. The zero value gives the same result as Parse.
+type ParseOptions struct {
+	// KeepIncomplete keeps a goroutine whose stack could not be fully parsed,
+	// with the frames parsed before the error, instead of discarding it.
+	// Kept goroutines have Incomplete set. An error is still returned for each one.
+	KeepIncomplete bool
+}
+
+// ParseWithOptions parses a goroutine stack trace dump with the given options.
+// See Parse for the input format and error handling.
+func ParseWithOptions(r io.Reader, opts ParseOptions) ([]*Goroutine, []error) {
 	var (
 		sc      = bufio.NewScanner(r)
 		state   parserState
@@ -56,7 +70,12 @@ func Parse(r io.Reader) ([]*Goroutine, []error) {
 				line,
 			)
 			errs = append(errs, err)
-			goroutines = goroutines[0 : len(goroutines)-1]
+			// An invalid header appends a nil g, which has nothing to keep.
+			if opts.KeepIncomplete && g != nil {
+				goroutines[len(goroutines)-1].Incomplete = true
+			} else {
+				goroutines = goroutines[0 : len(goroutines)-1]
+			}
 			state = stateHeader
 		}
 	)
@@ -64,7 +83,10 @@ func Parse(r io.Reader) ([]*Goroutine, []error) {
 	// This for loop implements a simple line based state machine for parsing
 	// the goroutines dump. The state != stateHeader makes sure we handle an
 	// unexpected EOF the same way we'd handle an empty line.
-	for sc.Scan() || state != stateHeader {
+	for scanned := sc.Scan(); scanned || state != stateHeader; scanned = sc.Scan() {
+		if opts.KeepIncomplete && !scanned && sc.Err() != nil {
+			goroutines[len(goroutines)-1].Incomplete = true
+		}
 		line = sc.Bytes()
 		lineNum++
 
@@ -83,13 +105,11 @@ func Parse(r io.Reader) ([]*Goroutine, []error) {
 				goroutines = append(goroutines, g)
 			}
 			if state == stateOriginatingFrom {
-				// Make sure we capture only the ID that we need. If it's truncated,
-				// it'll be handled by the error check below
-				ancestorIDStr := bytes.TrimSuffix(
-					bytes.TrimPrefix(line, originatingFromPrefix),
-					[]byte("]:"),
-				)
-				ancestorID, err := strconv.Atoi(string(ancestorIDStr))
+				if !bytes.HasSuffix(line, []byte("]:")) {
+					abortGoroutine("invalid ancestor header")
+					continue
+				}
+				ancestorID, err := strconv.Atoi(string(line[len(originatingFromPrefix) : len(line)-2]))
 				if err != nil {
 					abortGoroutine(err.Error())
 					continue
@@ -119,16 +139,19 @@ func Parse(r io.Reader) ([]*Goroutine, []error) {
 				continue
 			}
 			if state == stateStackFunc {
-				g.Stack = append(g.Stack, f)
 				state = stateStackFile
 			} else {
-				g.CreatedBy = f
 				state = stateCreatedByFile
 			}
 		case stateStackFile, stateCreatedByFile:
 			if !parseFile(line, f) {
 				abortGoroutine("invalid file:line ref")
 				continue
+			}
+			if state == stateStackFile {
+				g.Stack = append(g.Stack, f)
+			} else {
+				g.CreatedBy = f
 			}
 			state = stateCreatedBy
 		case stateCreatedBy:
@@ -340,6 +363,11 @@ type Goroutine struct {
 	// additional frames were elided. This happens when the stack depth exceeds
 	// 100.
 	FramesElided bool
+	// Incomplete is true if the parser could not fully parse this goroutine.
+	// Only ParseWithOptions with KeepIncomplete sets it, on the top-level
+	// goroutine also when one of its ancestor blocks is cut. A stack cut at a
+	// frame boundary or inside its last line can still look complete.
+	Incomplete bool `json:"Incomplete,omitempty"`
 	// CreatedBy is the frame that created this goroutine, nil for main().
 	CreatedBy *Frame
 	// Ancestors are the Goroutines that created this goroutine.
