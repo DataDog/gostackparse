@@ -8,6 +8,7 @@ package gostackparse
 import (
 	"bufio"
 	"bytes"
+	"errors"
 	"io/ioutil"
 	"path/filepath"
 	"reflect"
@@ -92,6 +93,47 @@ func TestParseWithOptions_KeepIncompleteScannerError(t *testing.T) {
 	}
 }
 
+func TestParseWithOptions_MaxLineSize(t *testing.T) {
+	const size = 70 << 10
+	const header = "goroutine 1 [running]:\n"
+	const labelStart = "goroutine 1 [running] {handler: "
+	const labelEnd = "}:"
+	const second = "\ngoroutine 2 [running]:\nmain.second()\n\t/main.go:2\n"
+	function := "main." + strings.Repeat("f", size-len("main.()"))
+	file := "/" + strings.Repeat("f", size-len("\t/:1"))
+	labelHeader := labelStart + strings.Repeat("x", size-len(labelStart)-len(labelEnd)) + labelEnd + "\n"
+	for _, tt := range []struct {
+		name       string
+		first      string
+		frame      Frame
+		defaultErr string
+	}{
+		{"function line", header + function + "()\n\t/main.go:1\n", Frame{Func: function, File: "/main.go", Line: 1}, "invalid function call"},
+		{"file line", header + "main.first()\n\t" + file + ":1\n", Frame{Func: "main.first", File: file, Line: 1}, "invalid file:line ref"},
+		{"label header", labelHeader + "main.first()\n\t/main.go:1\n", Frame{Func: "main.first", File: "/main.go", Line: 1}, ""},
+	} {
+		t.Run(tt.name, func(t *testing.T) {
+			input := tt.first + second
+			gs, errs := ParseWithOptions(strings.NewReader(input), ParseOptions{})
+			require.Empty(t, gs)
+			if tt.defaultErr == "" {
+				require.Len(t, errs, 1)
+			} else {
+				require.Len(t, errs, 2)
+				require.ErrorContains(t, errs[0], tt.defaultErr)
+			}
+			require.ErrorIs(t, errs[len(errs)-1], bufio.ErrTooLong)
+
+			gs, errs = ParseWithOptions(strings.NewReader(input), ParseOptions{MaxLineSize: 1 << 20})
+			require.Empty(t, errs)
+			require.Equal(t, []*Goroutine{
+				{ID: 1, State: "running", Stack: []*Frame{&tt.frame}},
+				{ID: 2, State: "running", Stack: []*Frame{{Func: "main.second", File: "/main.go", Line: 2}}},
+			}, gs)
+		})
+	}
+}
+
 func TestParseWithOptions_InvalidHeader(t *testing.T) {
 	for _, input := range []string{"goroutine ", "goroutine nope [running]:\n", "goroutine 1 []:\n"} {
 		gs, errs := ParseWithOptions(strings.NewReader(input), ParseOptions{KeepIncomplete: true})
@@ -145,5 +187,45 @@ func checkParseSuperset(t testing.TB, defaults, kept []*Goroutine, errs []error)
 	}
 	if i != len(defaults) {
 		t.Fatalf("kept %d of %d default goroutines", i, len(defaults))
+	}
+}
+
+func TestParseWithOptions_MaxLineSizeBoundary(t *testing.T) {
+	const header = "goroutine 1 [running]:\n"
+	funcLine := func(n int, eol string) string { // n bytes including eol
+		return "main.f()" + strings.Repeat("x", n-8-len(eol)) + eol
+	}
+	fileLine := func(n int) string { // n bytes, no line ending
+		return "\t/" + strings.Repeat("a", n-7) + ".go:1"
+	}
+	for _, tt := range []struct {
+		name  string
+		input string
+		limit int
+		ok    bool
+	}{
+		{"LF fits", header + funcLine(64, "\n") + "\t/main.go:1\n", 64, true},
+		{"LF one over", header + funcLine(65, "\n") + "\t/main.go:1\n", 64, false},
+		{"CRLF fits", header + funcLine(64, "\r\n") + "\t/main.go:1\n", 64, true},
+		{"CRLF one over", header + funcLine(65, "\r\n") + "\t/main.go:1\n", 64, false},
+		{"last line without ending fits", header + "main.f()\n" + fileLine(63), 64, true},
+		{"last line without ending at limit", header + "main.f()\n" + fileLine(64), 64, false},
+		{"negative limit keeps the default", header + funcLine(70*1024, "\n") + "\t/main.go:1\n", -1, false},
+	} {
+		t.Run(tt.name, func(t *testing.T) {
+			gs, errs := ParseWithOptions(strings.NewReader(tt.input), ParseOptions{MaxLineSize: tt.limit})
+			if tt.ok {
+				if len(errs) != 0 || len(gs) != 1 || len(gs[0].Stack) != 1 {
+					t.Fatalf("got %d goroutines, errs=%v", len(gs), errs)
+				}
+				return
+			}
+			for _, err := range errs {
+				if errors.Is(err, bufio.ErrTooLong) {
+					return
+				}
+			}
+			t.Fatalf("want bufio.ErrTooLong, got errs=%v", errs)
+		})
 	}
 }

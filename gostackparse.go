@@ -46,6 +46,11 @@ type ParseOptions struct {
 	// with the frames parsed before the error, instead of discarding it.
 	// Kept goroutines have Incomplete set. An error is still returned for each one.
 	KeepIncomplete bool
+
+	// MaxLineSize is the largest number of bytes a line, including its line
+	// ending, can have. A last line without a line ending can have one byte
+	// less. Zero or less uses bufio.MaxScanTokenSize (64 KiB).
+	MaxLineSize int
 }
 
 // ParseWithOptions parses a goroutine stack trace dump with the given options.
@@ -79,6 +84,10 @@ func ParseWithOptions(r io.Reader, opts ParseOptions) ([]*Goroutine, []error) {
 			state = stateHeader
 		}
 	)
+
+	if opts.MaxLineSize > 0 {
+		sc.Buffer(nil, opts.MaxLineSize)
+	}
 
 	// This for loop implements a simple line based state machine for parsing
 	// the goroutines dump. The state != stateHeader makes sure we handle an
