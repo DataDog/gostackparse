@@ -8,17 +8,26 @@ on:
 
 jobs:
   test:
+    permissions:
+      contents: read
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        # Keep in sync with the go directive in go.mod.
+        go: ['1.18', oldstable, stable]
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
       - name: Set up Go
         uses: actions/setup-go@d8cbb8045d7f43706b9177cceb36c1f91a6644d5 # v7.1.0
         with:
-          go-version: 1.24
+          go-version: ${{ matrix.go }}
 
       - name: Build
         run: go build -v ./...
 
+      - name: Vet
+        run: go vet ./...
+
       - name: Test
-        run: go test -v ./...
+        run: go test -race -count=1 ./...
